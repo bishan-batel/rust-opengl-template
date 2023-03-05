@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 use std::ptr;
+use glm::Vec2;
 use sdl2::event::Event;
 use crate::game::Game;
 use crate::render::buffer::{BufferObject, BufferType, BufferUsage};
@@ -24,30 +25,30 @@ impl GameState {
             Program::from_shaders(&[vert, frag]).unwrap()
         };
         screen_program.set_used();
-        screen_program.set_vec2("windowSize", (window_size.0 as f32, window_size.1 as f32));
+        screen_program.set_vec2("windowSize", Vec2::new(window_size.0 as f32, window_size.1 as f32));
 
         let screen_vao = {
             #[repr(C, packed)]
             struct Vertex {
-                pos: [f32; 2],
-                uv: [f32; 2],
+                pos: Vec2,
+                uv: Vec2,
             }
             const SCREEN_VERTICES: [Vertex; 4] = [
                 Vertex {
-                    pos: [-1., -1.],
-                    uv: [0.0, 1.0],
+                    pos: Vec2::new(-1., -1.),
+                    uv: Vec2::new(0.0, 1.0),
                 },
                 Vertex {
-                    pos: [1., -1.],
-                    uv: [1.0, 1.0],
+                    pos: Vec2::new(1., -1.),
+                    uv: Vec2::new(1.0, 1.0),
                 },
                 Vertex {
-                    pos: [1., 1.],
-                    uv: [1.0, 0.0],
+                    pos: Vec2::new(1., 1.),
+                    uv: Vec2::new(1.0, 0.0),
                 },
                 Vertex {
-                    pos: [-1., 1.],
-                    uv: [0.0, 0.0],
+                    pos: Vec2::new(-1., 1.),
+                    uv: Vec2::new(0.0, 0.0),
                 },
             ];
 

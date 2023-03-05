@@ -36,13 +36,7 @@ impl AttributeLayout {
     }
 
     pub fn number(&mut self, kind: GlDataType) -> &mut Self {
-        self.attributes.push(AttributeDescription {
-            kind,
-            number: 1,
-            normalized: false,
-        });
-        self.stride += kind.size();
-        self
+        self.vector(kind, 1)
     }
 
     pub fn vector(&mut self, kind: GlDataType, number: usize) -> &mut Self {
@@ -53,6 +47,30 @@ impl AttributeLayout {
         });
         self.stride += kind.size() * number;
         self
+    }
+
+    pub fn float(&mut self) {
+        self.number(GlDataType::Float);
+    }
+
+    pub fn int(&mut self) {
+        self.number(GlDataType::Int);
+    }
+
+    pub fn uint(&mut self) {
+        self.number(GlDataType::UnsignedInt);
+    }
+
+    pub fn vec2(&mut self) {
+        self.vector(GlDataType::Float, 2);
+    }
+
+    pub fn vec3(&mut self) {
+        self.vector(GlDataType::Float, 3);
+    }
+
+    pub fn vec4(&mut self) {
+        self.vector(GlDataType::Float, 4);
     }
 }
 

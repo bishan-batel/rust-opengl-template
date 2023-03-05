@@ -4,6 +4,7 @@ mod state;
 
 extern crate sdl2;
 extern crate gl;
+extern crate nalgebra_glm as glm;
 
 use std::time::Instant;
 use crate::game::Game;

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::ffi::{CStr, CString};
 use gl::types::{GLchar, GLenum, GLint, GLuint};
+use glm::{Vec2, Vec3};
 
 #[repr(u32)]
 pub enum ShaderType {
@@ -157,16 +158,16 @@ impl Program {
             gl::Uniform1f(self.get_uniform_location(name), val);
         }
     }
-    pub fn set_vec2(&mut self, name: &str, val: (f32, f32)) {
+    pub fn set_vec2(&mut self, name: &str, val: Vec2) {
         self.set_used();
         unsafe {
-            gl::Uniform2f(self.get_uniform_location(name), val.0, val.1);
+            gl::Uniform2f(self.get_uniform_location(name), val.x, val.y);
         }
     }
-    pub fn set_vec3(&mut self, name: &str, val: (f32, f32, f32)) {
+    pub fn set_vec3(&mut self, name: &str, val: Vec3) {
         self.set_used();
         unsafe {
-            gl::Uniform3f(self.get_uniform_location(name), val.0, val.1, val.2);
+            gl::Uniform3f(self.get_uniform_location(name), val.x, val.y, val.z);
         }
     }
 
